@@ -28,7 +28,7 @@ const Sandbox = () => {
     }
 
     if (!validator.isLength(signUpInput.password, { min: 5 })) {
-      return setError("Password mus be at lease 5 characters");
+      return setError("Password must be at least 5 characters");
     }
 
     if (signUpInput.password !== signUpInput.confirmPassword) {
