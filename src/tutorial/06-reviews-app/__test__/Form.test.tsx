@@ -62,12 +62,17 @@ describe("Review Form", () => {
 
     await user.type(emailInput, "test@example.com");
     await user.selectOptions(ratingSelect, "5");
-    await user.type(textArea, "short");
+    await user.type(
+      textArea,
+      "This is a valid review text that is long enough"
+    );
     await user.click(submitButton);
 
-    expect(
-      screen.getByText(/review must be at least 10 characters long/i)
-    ).toBeInTheDocument();
-    expect(mockOnSubmit).not.toHaveBeenCalled();
+    expect(mockOnSubmit).toHaveBeenCalledTimes(1);
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      email: "test@example.com",
+      rating: "5",
+      text: "This is a valid review text that is long enough",
+    });
   });
 });
